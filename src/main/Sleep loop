@@ -1,0 +1,41 @@
+          SLEEP METHOD
+
+        double drawInterval = 1000000000/FPS; // khoảng thời gian giữa các lần vẽ
+        double nextDrawTime = System.nanoTime()+ drawInterval;
+
+
+            try {
+
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime = remainingTime/1000000;
+                if(remainingTime < 0) {
+                    remainingTime = 0;
+                }
+                // cho luồng ngủ bằng đúng thời gian chờ đã khởi tạo
+                Thread.sleep((long) remainingTime);
+                nextDrawTime += drawInterval;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+
+            Delta METHOD
+
+        double drawInterval = 1000000000/FPS;
+                double delta = 0;      // giá trị đại diện cho sự chênh lệch thời gian giữa các lần vẽ
+                long lastTime = System.nanoTime(); // giá trị của lần vẽ trước
+                long currentTime;
+
+                while (gameThread != null) {
+
+                    currentTime = System.nanoTime();
+
+                    delta += (currentTime - lastTime) / drawInterval; // tính toán giá trị của delta
+                    lastTime = currentTime;
+
+                    if(delta >= 1) {
+                        update();
+                        repaint();
+                        delta--;
+                    }
+                }
