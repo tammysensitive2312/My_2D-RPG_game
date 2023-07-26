@@ -16,7 +16,7 @@ public class Sound {
         soundURL[1] = getClass().getResource("/Sound/coin.wav");
         soundURL[2] = getClass().getResource("/Sound/powerup.wav");
         soundURL[3] = getClass().getResource("/Sound/unlock.wav");
-        soundURL[4] = getClass().getResource("/Sound/funfare.wav");
+        soundURL[4] = getClass().getResource("/Sound/fanfare.wav");
     }
 
     public void setFile(int i) {
@@ -25,7 +25,7 @@ public class Sound {
             clip = AudioSystem.getClip();
             clip.open(ais);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
     public void play() {
